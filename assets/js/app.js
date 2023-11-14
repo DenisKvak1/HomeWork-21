@@ -11,10 +11,11 @@ function FrozenDayFunc(temperatures) {
       let currentTemperature = temperatures[i];
       let nextTemperature = temperatures[i + 1];
   
-      if (currentTemperature > 0 && nextTemperature < 0) {
+      if (currentTemperature > 0 && nextTemperature <= 0) {
         FreezingDay++;
       }
     }
+
     return FreezingDay;
   }
 
