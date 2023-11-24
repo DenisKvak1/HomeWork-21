@@ -40,3 +40,41 @@ function QuantityFrozenDayFunc(temperatures){
 }
 console.log(`Количество морозных дней: ${FrozenDayFunc(winterDays)}`)
 console.log(`Максимальное количество морозных дней подряд: ${QuantityFrozenDayFunc(winterDays)}`)
+
+
+let btc=[10, 18, 33, 7, 31, 3, 8, 22, 29, 7, 8, 30, 15, 20, 30, 1, 25]
+function MaxProfitNoneEfficiency(prices) {  // Алгоритм через вложенные for (не эффективный - сложнсть O(n^2) )
+    if (!prices || prices.length < 2) {
+        return 0;  
+    }
+    let maxProfit = 0;
+    for (let i = 0; i < prices.length - 1; i++) {
+        for (let j = i + 1; j < prices.length; j++) {
+            const potentialProfit = prices[j] - prices[i];
+            if (potentialProfit > maxProfit) {
+                maxProfit = potentialProfit;
+            }
+        }
+    }
+    return maxProfit;
+}
+function MaxProfitEfficiency(prices) {
+    if (!prices || prices.length < 2)   {   // Алгоритм через 1 for (эффективный - сложнсть O(n) )
+        return 0;
+    }
+    let minPrice = prices[0];
+    let maxProfit = 0;
+    for (let i = 1; i < prices.length; i++) {
+        const currentPrice = prices[i];
+        const potentialProfit = currentPrice - minPrice;
+        if (potentialProfit > maxProfit) {
+            maxProfit = potentialProfit;
+        }
+        if (currentPrice < minPrice) {
+            minPrice = currentPrice;
+        }
+    }
+    return maxProfit;
+}
+console.log(`Максимальная прибыль: ${MaxProfitNoneEfficiency(btc)} (сложность O(n^2) вложеные for )`)
+console.log(`Максимальная прибыль: ${MaxProfitEfficiency(btc)} (сложность O(n) 1 for )`)
